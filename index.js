@@ -1,4 +1,4 @@
-const baseUrl = "https://pulsemaalerrestapi.azurewebsites.net/api/pulses"
+const baseUrl = "https://pulsemaalerrestapi.azurewebsites.net/api/pulses"// API URL
 Vue.createApp({
     data() {
         return {
@@ -13,7 +13,7 @@ Vue.createApp({
         this.getAll(baseUrl)
     },
     methods: {
-        async getAll(baseUrl) {
+        async getAll(baseUrl) { // get all persons from API
             try {
                 const response = await axios.get(baseUrl)
                 this.allPersons = await response.data
@@ -24,7 +24,7 @@ Vue.createApp({
                 alert(ex.message) 
             }
         },
-        filterByName(name) {
+        filterByName(name) {// filter persons by name
           
             this.person = this.allPersons.filter(b => b.name.includes(name))
             console.log(this.person)
