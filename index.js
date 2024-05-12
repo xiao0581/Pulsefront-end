@@ -25,8 +25,8 @@ Vue.createApp({
             }
         },
         filterByName(name) {// filter persons by name
-          
-            this.person = this.allPersons.filter(b => b.name.includes(name))
+            const tolowerName = name.toLowerCase()
+            this.person = this.allPersons.filter(b => b.name.toLowerCase().includes(tolowerName))
             console.log(this.person)
         }
 
