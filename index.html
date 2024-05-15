@@ -51,28 +51,28 @@
       <div class="module"  >
         <h1 id="staticBPM" ><span v-if="person.length" v-for="per in person">{{per.hvilePuls}}</span> BPM</h1>
         <h4>Hvile Puls </h4>
-        <span class="btn btn-link text-white">→</span>
+        <a class="btn btn-link text-white" href="Pages/restpulse.html">→</a>
       </div>
     </div>
     <div class="col-6">
       <div class="module">
         <h1 id="activeBPM"><span v-if="person.length" v-for="per in person">{{per.aktivPuls}}</span> BPM</h1>
         <h4>Aktiv Puls</h4>     
-        <span class="btn btn-link text-white">→</span>
+        <a class="btn btn-link text-white" href="Pages/activepuls.html">→</a>
       </div>
     </div>
     <div class="col-6">
       <div class="module ">
         <h1 id="AfterExerciseBPM"><span v-if="person.length" v-for="per in person">{{per.afterTrainingPuls}}</span> BPM</h1>
         <h4>Efter Træning</h4>
-        <span class="btn btn-link">→</span>
+        <a class="btn btn-link text-white" href="Pages/aftertrainingpulse.html">→</a>
       </div>    
     </div>
     <div class="col-6">
         <div class="module ">
           <h1 id="StressBPM"><span v-if="person.length" v-for="per in person">{{per.stresspuls}}</span> BPM</h1>
           <h4>Stresspuls </h4>
-          <span class="btn btn-link">→</span>
+          <a class="btn btn-link text-white" href="Pages/stresspulse.html">→</a>
         </div>    
       </div>
   </div>
