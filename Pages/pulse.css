@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.container {
+    width: 48%; /* To ensure there's space between the two containers */
+    box-sizing: border-box; /* Ensure padding and borders are included in the width */
+    padding: 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-table {
+    width: 100%; /* Make the table full width within the container */
+    margin-top: 1rem;
+    color: #212529;
+}
+
+.custom-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.custom-table th, .custom-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.custom-table th {
+    background-color: #343a40;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.custom-table tr:nth-child(even) {
+    background-color: #e9ecef;
+}
+
+.custom-table tr:hover {
+    background-color: #adb5bd;
+    cursor: pointer;
+}
+
+.custom-table caption {
+    caption-side: bottom;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #6c757d;
+    padding: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .container {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}
