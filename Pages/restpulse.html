@@ -40,37 +40,39 @@
 
         <div >
             <input placeholder="please enter name" type="text" v-model="name" >
-            <button v-on:click="filterByName(name)" class="btn btn-secondary">Search</button>
+            <button v-on:click="getbyName(name)" class="btn btn-secondary">Search</button>
         </div>
 
         <div class="row">
             <div class="container left">
                 <div>
-                    <h1>Rest Pulse</h1>
+                    <h1>hvilepuls</h1>
                     <p>Her kan du se historik over din pulsmåling.</p>
                 </div>
             </div>
     
             <div class="container right">
                 <div>
-                    <h1>Rest Pulse</h1>
+                    <h1>hvilepuls</h1>
                     <p>Her kan du se din hvilepuls, samt historik over hvilepuls.</p>
                 </div>
                 <div class="custom-table">
                     <table>
                         <thead>
                             <tr>
+                                <th>Navn</th>
                                 <th>Dato</th>
                                 <th>Tidspunkt</th>
-                                <th>Puls</th>
+                                <th>hvilePuls</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="per in person">
-                                <td>test</td>
-                                <td>test</td>
-                                <td>{{ per.hvilePuls }}</td>
-                            </tr>
+                            <tr v-for="history in hvilePulsFiltereds" :key="history.historyId">
+                                <td>{{ person.name }}</td>
+                                <td>{{ formatDate(history.recordTime) }}</td>
+                                <td>{{ formatTime(history.recordTime) }}</td>
+                                <td>{{ history.hvilePuls }} BPM</td>                              
+                              </tr>
                         </tbody>
                     </table>
                 </div>

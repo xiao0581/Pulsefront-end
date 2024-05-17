@@ -39,7 +39,7 @@
 
         <div >
             <input placeholder="please enter name" type="text" v-model="name" >
-            <button v-on:click="filterByName(name)" class="btn btn-secondary">Search</button>
+            <button v-on:click="getbyName(name)" class="btn btn-secondary">Search</button>
         </div>
 
         <div class="row">
@@ -59,17 +59,19 @@
                     <table>
                         <thead>
                             <tr>
+                                <th>Navn</th>
                                 <th>Dato</th>
                                 <th>Tidspunkt</th>
-                                <th>Puls</th>
+                                <th>stresspuls</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="per in person">
-                                <td>test</td>
-                                <td>test</td>
-                                <td>{{ per.stresspuls }}</td>
-                            </tr>
+                            <tr v-for="history in stresspulsFiltered" :key="history.historyId">
+                                <td>{{ person.name }}</td>
+                                <td>{{ formatDate(history.recordTime) }}</td>
+                                <td>{{ formatTime(history.recordTime) }}</td>
+                                <td>{{ history.stresspuls}} BPM</td>                              
+                              </tr>
                         </tbody>
                     </table>
                 </div>

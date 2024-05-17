@@ -38,41 +38,39 @@
         </div>
    </nav>
 
- <div >
-  <input placeholder="please enter name" type="text" v-model="name" >
-        <button v-on:click="filterByName(name)" class="btn btn-secondary">
-          Search
-        </button>     <!--search button -->
- </div>
 
 <div class="container py-5"  >
   <div class="row g-4">
     <div class="col-6">
-      <div class="module"  >
-        <h1 id="staticBPM" ><span v-if="person.length" v-for="per in person">{{per.hvilePuls}}</span> BPM</h1>
-        <h4>Hvile Puls </h4>
-        <a class="btn btn-link text-white" href="Pages/restpulse.html">→</a>
-      </div>
-    </div>
-    <div class="col-6">
       <div class="module">
-        <h1 id="activeBPM"><span v-if="person.length" v-for="per in person">{{per.aktivPuls}}</span> BPM</h1>
-        <h4>Aktiv Puls</h4>     
-        <a class="btn btn-link text-white" href="Pages/activepuls.html">→</a>
+          <h1>01</h1>
+          <h4>Hvile Puls</h4>
+          <p>Mål din hvilepuls nemt med vores intuitive platform. Hurtigt, præcist.</p>
+          <a class="btn btn-link text-white" href="Pages/restpulse.html">↗</a>
       </div>
     </div>
     <div class="col-6">
-      <div class="module ">
-        <h1 id="AfterExerciseBPM"><span v-if="person.length" v-for="per in person">{{per.afterTrainingPuls}}</span> BPM</h1>
+      <div class="module highlight">
+        <h1>02</h1>
+        <h4>Aktiv Puls</h4>
+        <p>Mål din puls under aktivitet for at sikre optimal træningsintensitet og sundhed.</p>
+        <a class="btn btn-link text-white" href="Pages/activepuls.html">↗</a>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="module highlight">
+        <h1>03</h1>
         <h4>Efter Træning</h4>
-        <a class="btn btn-link text-white" href="Pages/aftertrainingpulse.html">→</a>
+        <p>Få præcis måling af din puls efter træning for at vurdere dit helbreds fremgang.</p>
+        <a class="btn btn-link text-white" href="Pages/aftertrainingpulse.html">↗</a>   
       </div>    
     </div>
     <div class="col-6">
         <div class="module ">
-          <h1 id="StressBPM"><span v-if="person.length" v-for="per in person">{{per.stresspuls}}</span> BPM</h1>
-          <h4>Stresspuls </h4>
-          <a class="btn btn-link text-white" href="Pages/stresspulse.html">→</a>
+        <h1>04</h1>
+        <h4>Stresspuls</h4>
+        <p>Få præcis måling af din puls Stresspuls for at vurdere dit helbreds fremgang.</p>
+          <a class="btn btn-link text-white" href="Pages/stresspulse.html">↗</a>
         </div>    
       </div>
   </div>

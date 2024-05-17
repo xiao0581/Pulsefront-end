@@ -1,4 +1,4 @@
-const baseUrl = "https://pulsemaalerrestapi.azurewebsites.net/api/pulses"// API URL
+const baseUrl = "https://pulsemaalerrestapi.azurewebsites.net/api/Persons/"// API URL
 Vue.createApp({
     data() {
         return {
@@ -8,27 +8,54 @@ Vue.createApp({
         name: null
         
         }
-    },
-    async created() { // life cycle method. Called when browser reloads page
-        this.getAll(baseUrl)
-    },
+    },  
+    computed: {
+        hvilePulsFiltereds() {
+            if (!this.person || !this.person.pulsHistories) {
+                return [];
+            }
+            return this.person.pulsHistories.filter(history => history.hvilePuls !== 0);
+        },
+        aktivPulsFiltered() {
+            if (!this.person || !this.person.pulsHistories) {
+                return [];
+            }
+            return this.person.pulsHistories.filter(history => history.aktivPuls !== 0);
+        },
+        afterTrainingPulsFiltered() {
+            if (!this.person || !this.person.pulsHistories) {
+                return [];
+            }
+            return this.person.pulsHistories.filter(history => history.afterTrainingPuls !== 0);
+        },
+        stresspulsFiltered() {
+            if (!this.person || !this.person.pulsHistories) {
+                return [];
+            }
+            return this.person.pulsHistories.filter(history => history.stresspuls !== 0);
+        },
+        
+    }, 
     methods: {
-        async getAll(baseUrl) { // get all persons from API
+        async getbyName(name) { // get all persons from API
             try {
-                const response = await axios.get(baseUrl)
-                this.allPersons = await response.data
-                this.persons = this.allPersons
-                console.log(this.allPersons)
+                const response = await axios.get(baseUrl+name.toLowerCase()+"/histories")
+                this.person = await response.data
+               
                 console.log(this.persons)
             } catch (ex) {
                 alert(ex.message) 
             }
         },
-        filterByName(name) {// filter persons by name
-            const tolowerName = name.toLowerCase()
-            this.person = this.allPersons.filter(b => b.name.toLowerCase().includes(tolowerName))
-            console.log(this.person)
-        }
+        formatDate(datetime) {
+            const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+            return new Date(datetime).toLocaleDateString(undefined, options);
+          },
+          formatTime(datetime) {
+            const options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            return new Date(datetime).toLocaleTimeString(undefined, options);
+          }
+       
 
     }
 

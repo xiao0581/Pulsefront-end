@@ -3,24 +3,38 @@
     background-color: #333;
     padding: 20px;
     border-radius: 5px;
-    height: 100%;
+    position: relative;
   }
-  #staticBPM {
-    color: rgb(240, 240, 7);
+
+  .module h1 {
+    font-size: 3em;
+    margin: 0;
   }
-  #AfterExerciseBPM {
-    color: rgb(240, 240, 7);
+  .module h4 {
+    margin: 10px 0;
+    font-size: 1.5em;
   }
-  #activeBPM {
-    color: rgb(240, 240, 7);
+  .module p {
+    font-size: 1em;
+    margin: 10px 0;
   }
-  #StressBPM {
-    color: rgb(240, 240, 7);
+  .module .btn-link {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2em;
+    text-decoration: none;
+    color: #fff;
   }
 
   .highlight {
+    color: rgb(17, 17, 17);
     background-color: #FFD700;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
   }
+
   .heart-rate {
     font-size: 24px;
     font-weight: bold;
