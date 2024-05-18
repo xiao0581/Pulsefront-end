@@ -3,9 +3,20 @@ Vue.createApp({
     data() {
         return {
             allPersons: [],
-         persons:[],
-         person:[],
-        name: null
+            persons:[],
+            person:[],
+            name: null,
+            loginUser: {
+                username: '',
+                password: ''
+            },
+            registerData: {
+                username: '',
+                email: '',
+                password: '',
+                fullName: '',
+                address: ''
+              }
         
         }
     },  
@@ -61,6 +72,52 @@ Vue.createApp({
           formatTime(datetime) {
             const options = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
             return new Date(datetime).toLocaleTimeString(undefined, options);
+          }, 
+          
+          showLoginModal() {
+            const modal = new bootstrap.Modal(document.getElementById('loginModal'));
+            modal.show();
+          },  
+          showRegisterModal() {
+            const modal = new bootstrap.Modal(document.getElementById('registerModal'));
+            modal.show();
+          },
+          login() {
+            // Handle the login logic here, for example, using axios to send the login request
+            axios.post('https://loginserver2.azurewebsites.net/api/Users/login', {
+                Username: this.loginUser.username,
+                Password: this.loginUser.password
+            })
+            .then(response => {
+              // Handle successful login
+              const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+              modal.hide();
+              alert('Login successful!');
+            })
+            .catch(error => {
+              // Handle login error
+              alert('Login failed!');
+            });
+          }, 
+          register() {
+            // Handle the registration logic here, for example, using axios to send the registration request
+            axios.post('https://loginserver2.azurewebsites.net/api/Users/register', {
+                Username: this.registerData.username,
+                Password: this.registerData.password,
+                Email: this.registerData.email,
+                FullName: this.registerData.fullName,
+                Address: this.registerData.address
+            })
+            .then(response => {
+              // Handle successful registration
+              const modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+              modal.hide();
+              alert('Registration successful!');
+            })
+            .catch(error => {
+              // Handle registration error
+              alert('Registration failed!');
+            });
           }
        
 

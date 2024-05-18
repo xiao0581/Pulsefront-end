@@ -1,158 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Heart Rate Monitor</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
-<link rel="stylesheet" href="index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart Rate Monitor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+  <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
   <div id="app">
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">PulsVis</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarColor03">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Home
-                  <span class="visually-hidden">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">History</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Om os</a>
-              </li>
-             
-            </ul>
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Login</button>
-            
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">PulsVis</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03"
+          aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor03">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">History</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Om os</a>
+            </li>
+
+          </ul>
+          <button class="btn btn-secondary my-2 my-sm-0" type="button" @click="showLoginModal">Login</button>
+          <button class="btn btn-secondary my-2 my-sm-0 ms-2" type="button" @click="showRegisterModal">Register</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Login</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form @submit.prevent="login">
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" v-model="loginUser.username" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" v-model="loginUser.password" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
           </div>
         </div>
-   </nav>
-
-
-<div class="container py-5"  >
-  <div class="row g-4">
-    <div class="col-6">
-      <div class="module">
-          <h1>01</h1>
-          <h4>Hvile Puls</h4>
-          <p>Mål din hvilepuls nemt med vores intuitive platform. Hurtigt, præcist.</p>
-          <a class="btn btn-link text-white" href="Pages/restpulse.html">↗</a>
       </div>
     </div>
-    <div class="col-6">
-      <div class="module highlight">
-        <h1>02</h1>
-        <h4>Aktiv Puls</h4>
-        <p>Mål din puls under aktivitet for at sikre optimal træningsintensitet og sundhed.</p>
-        <a class="btn btn-link text-white" href="Pages/activepuls.html">↗</a>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="module highlight">
-        <h1>03</h1>
-        <h4>Efter Træning</h4>
-        <p>Få præcis måling af din puls efter træning for at vurdere dit helbreds fremgang.</p>
-        <a class="btn btn-link text-white" href="Pages/aftertrainingpulse.html">↗</a>   
-      </div>    
-    </div>
-    <div class="col-6">
-        <div class="module ">
-        <h1>04</h1>
-        <h4>Stresspuls</h4>
-        <p>Få præcis måling af din puls Stresspuls for at vurdere dit helbreds fremgang.</p>
-          <a class="btn btn-link text-white" href="Pages/stresspulse.html">↗</a>
-        </div>    
-      </div>
-  </div>
-</div>
+       
+      
 
-<div class="container-fluid">
-    <div class="row dark-section">
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registerModalLabel">Register</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form @submit.prevent="register">
+              <div class="mb-3">
+                <label for="registerUsername" class="form-label">Username</label>
+                <input type="text" class="form-control" id="registerUsername" v-model="registerData.username" required>
+              </div>
+              <div class="mb-3">
+                <label for="registerEmail" class="form-label">Password</label>
+                <input type="password" class="form-control" id="registerPassword" v-model="registerData.email" required>
+              </div>
+              <div class="mb-3">
+                <label for="registerPassword" class="form-label">Email</label>
+                <input type="email" class="form-control" id="registerEmail" v-model="registerData.password" required>   
+              </div>
+              <div class="mb-3">
+                <label for="registerFullName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="registerFullName" v-model="registerData.fullName" required>
+              </div>
+              <div class="mb-3">
+                <label for="registerAddress" class="form-label">Address</label>
+                <input type="text" class="form-control" id="registerAddress" v-model="registerData.address" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+       
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-6">
+          <div class="module">
+            <h1>01</h1>
+            <h4>Hvile Puls</h4>
+            <p>Mål din hvilepuls nemt med vores intuitive platform. Hurtigt, præcist.</p>
+            <a class="btn btn-link text-white" href="Pages/restpulse.html">↗</a>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="module highlight">
+            <h1>02</h1>
+            <h4>Aktiv Puls</h4>
+            <p>Mål din puls under aktivitet for at sikre optimal træningsintensitet og sundhed.</p>
+            <a class="btn btn-link text-white" href="Pages/activepuls.html">↗</a>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="module highlight">
+            <h1>03</h1>
+            <h4>Efter Træning</h4>
+            <p>Få præcis måling af din puls efter træning for at vurdere dit helbreds fremgang.</p>
+            <a class="btn btn-link text-white" href="Pages/aftertrainingpulse.html">↗</a>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="module ">
+            <h1>04</h1>
+            <h4>Stresspuls</h4>
+            <p>Få præcis måling af din puls Stresspuls for at vurdere dit helbreds fremgang.</p>
+            <a class="btn btn-link text-white" href="Pages/stresspulse.html">↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row dark-section">
         <div class="col-md-6 text-left content-padding">
-            <h1>Vores mission er at optimere dit helbred ved nøjagtig pulsmåling.</h1>
-            
+          <h1>Vores mission er at optimere dit helbred ved nøjagtig pulsmåling.</h1>
+
         </div>
         <div class="col-md-6 text-left content-padding">
-            <p>Vi arbejder utrætteligt for at tilbyde den mest præcise pulsovervågning og
-                hjælpe dig med at forstå din krops signaler for optimal sundhed og
-                træningseffektivitet.</p>
-               <div class="row">
-                <div class="col-4">
-                <h3>100K</h3>
-                <p>Brugere</p>
+          <p>Vi arbejder utrætteligt for at tilbyde den mest præcise pulsovervågning og
+            hjælpe dig med at forstå din krops signaler for optimal sundhed og
+            træningseffektivitet.</p>
+          <div class="row">
+            <div class="col-4">
+              <h3>100K</h3>
+              <p>Brugere</p>
             </div>
             <div class="col-4">
-                <h3>5 år</h3>
-                <p>På markedet</p>
+              <h3>5 år</h3>
+              <p>På markedet</p>
             </div>
             <div class="col-4">
-                <h3>10M</h3>
-                <p>Pulsmålinger</p>
-            </div></div> 
+              <h3>10M</h3>
+              <p>Pulsmålinger</p>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
-
-
-<div class="container my-5">
-    <div class="row">
-        <div class="col-12  col-md-6">   
-                <h3>Hvad er en normal hvilepuls?</h3>
-                <p>Den normale hvilepuls er mellem 60-100 slag per minut (BPM) for voksne. Dog kan den ideelle hvilepuls variere afhængigt af faktorer som alder, fitnessniveau og generel sundhedstilstand. For sportsudøvere og personer med god kardiovaskulær sundhed kan hvilepulsen være lavere, typisk under 60 BPM.</p>
-                <button class="btn btn-success mt-2">Lær Mere</button>
-        </div>
-        <div class="col-12  col-md-6">
-            <img src="tr.jpg" class="img-fluid" alt="Laptop with data">
-        </div>
-    </div>
- </div>
-
- <div class="container my-5">
-    <div class="row">
-        <div class="col-12  col-md-6">   
-            <img src="sover.jpg" class="img-fluid" alt="Laptop with data">
-        </div>
-        <div class="col-12  col-md-6">
-            <h3>Hvad er det bedste hjertefrekvensområde for forskellige aldre?</h3>
-            <p>Hjertefrekvensen ændrer sig med alderen. Som en generel retningslinje er her de omtrentlige gennemsnitlige hvilepulsområder opdelt efter alder:
-                <div>Børn (0-2 år): 100-160 BPM</div>
-                <div> Børn (3-4 år): 80-120 BPM</div>
-                    <div>Børn (5-6 år): 75-115 BPM</div>
-                        <div>Børn (7-9 år): 70-110 BPM</div>
-                            <div>Ældre børn og teenagere: 60-100 BPM</div>
-                                <div>Voksne (18-64 år): 60-100 BPM</div>
-                                    <div> Ældre (over 65 år): 60-90 BPM</div>
-                                        <div> Husk, individuelle forskelle er almindelige, så det er vigtigt at konsultere en sundhedsfaglig for at få personlig rådgivning.</div></p>
-            <button class="btn btn-success mt-2">Lær Mere</button>
-            
-        </div>
-    </div>
- </div>
-
- <div class="container my-5">
-  <div class="row">
-      <div class="col-12  col-md-6">   
-              <h3>Øger angst hjertefrekvensen?</h3>
-              <p>Ja, angst og stress kan øge din hjertefrekvens. Når du føler dig ængstelig eller stresset, aktiveres kroppens "kæmp eller flygt"-respons, hvilket fører til en stigning i hjertefrekvens og blodtryk. Dette er en naturlig fysiologisk reaktion, der forbereder din krop på at håndtere potentielle trusler. Imidlertid kan kronisk angst og høje stressniveauer have negative konsekvenser for dit kardiovaskulære helbred, så det er afgørende at effektivt håndtere stress gennem afslapningsteknikker og stressreduktionstrategier.</p>
-              <button class="btn btn-success mt-2">Lær Mere</button>
       </div>
-      <div class="col-12  col-md-6">
+    </div>
+
+
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-12  col-md-6">
+          <h3>Hvad er en normal hvilepuls?</h3>
+          <p>Den normale hvilepuls er mellem 60-100 slag per minut (BPM) for voksne. Dog kan den ideelle hvilepuls
+            variere afhængigt af faktorer som alder, fitnessniveau og generel sundhedstilstand. For sportsudøvere og
+            personer med god kardiovaskulær sundhed kan hvilepulsen være lavere, typisk under 60 BPM.</p>
+          <button class="btn btn-success mt-2">Lær Mere</button>
+        </div>
+        <div class="col-12  col-md-6">
+          <img src="tr.jpg" class="img-fluid" alt="Laptop with data">
+        </div>
+      </div>
+    </div>
+
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-12  col-md-6">
+          <img src="sover.jpg" class="img-fluid" alt="Laptop with data">
+        </div>
+        <div class="col-12  col-md-6">
+          <h3>Hvad er det bedste hjertefrekvensområde for forskellige aldre?</h3>
+          <p>Hjertefrekvensen ændrer sig med alderen. Som en generel retningslinje er her de omtrentlige gennemsnitlige
+            hvilepulsområder opdelt efter alder:
+          <div>Børn (0-2 år): 100-160 BPM</div>
+          <div> Børn (3-4 år): 80-120 BPM</div>
+          <div>Børn (5-6 år): 75-115 BPM</div>
+          <div>Børn (7-9 år): 70-110 BPM</div>
+          <div>Ældre børn og teenagere: 60-100 BPM</div>
+          <div>Voksne (18-64 år): 60-100 BPM</div>
+          <div> Ældre (over 65 år): 60-90 BPM</div>
+          <div> Husk, individuelle forskelle er almindelige, så det er vigtigt at konsultere en sundhedsfaglig for at få
+            personlig rådgivning.</div>
+          </p>
+          <button class="btn btn-success mt-2">Lær Mere</button>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-12  col-md-6">
+          <h3>Øger angst hjertefrekvensen?</h3>
+          <p>Ja, angst og stress kan øge din hjertefrekvens. Når du føler dig ængstelig eller stresset, aktiveres
+            kroppens "kæmp eller flygt"-respons, hvilket fører til en stigning i hjertefrekvens og blodtryk. Dette er en
+            naturlig fysiologisk reaktion, der forbereder din krop på at håndtere potentielle trusler. Imidlertid kan
+            kronisk angst og høje stressniveauer have negative konsekvenser for dit kardiovaskulære helbred, så det er
+            afgørende at effektivt håndtere stress gennem afslapningsteknikker og stressreduktionstrategier.</p>
+          <button class="btn btn-success mt-2">Lær Mere</button>
+        </div>
+        <div class="col-12  col-md-6">
           <img src="angst.jpg" class="img-fluid" alt="Laptop with data">
+        </div>
       </div>
+    </div>
   </div>
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="index.js"></script>
 </body>
+
 </html>
