@@ -7,13 +7,16 @@
     <title>Rest Pulse</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
     <link rel="stylesheet" type="text/css" href="pulse.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
 </head>
 
 <body>
 
-    <div id="app">
+    <div id="app" data-pulse-type="hvilePuls">
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../index.html">PulsVis</a>
@@ -48,6 +51,7 @@
                 <div>
                     <h1>hvilepuls</h1>
                     <p>Her kan du se historik over din pulsmåling.</p>
+                    <div id="chart_div" style="width: 100%; height: 500px;"></div>
                 </div>
             </div>
     
@@ -56,7 +60,7 @@
                     <h1>Hvilepuls</h1>
                     <p>Her kan du se din hvilepuls, samt historik over hvilepuls.</p>
                 </div>
-                <div class="custom-table">
+                <div class="custom-table" id="">
                     <table>
                         <thead>
                             <tr>

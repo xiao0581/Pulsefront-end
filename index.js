@@ -6,6 +6,7 @@ Vue.createApp({
             persons:[],
             person:[],
             name: null,
+            pulseType: '',
             loginUser: {
                 username: '',
                 password: ''
@@ -49,6 +50,12 @@ Vue.createApp({
             }
             return this.person.pulsHistories.filter(history => history.stresspuls !== 0);
         },
+        filteredPulse() {
+          if (!this.person || !this.person.pulsHistories) {
+              return [];
+          }
+          return this.person.pulsHistories.filter(history => history[this.pulseType] !== 0);
+      }
         
     }, 
     methods: {
@@ -57,12 +64,41 @@ Vue.createApp({
             try {
                 const response = await axios.get(baseUrl+name.toLowerCase()+"/histories")
                 this.person = await response.data
-               
+                this.drawChart();
                 console.log(this.persons)
             } catch (ex) {
                 alert(ex.message) 
             }
         },
+
+        drawChart() {
+          google.charts.load('current', { packages: ['corechart'] });
+          google.charts.setOnLoadCallback(this.renderChart);
+      },
+      renderChart() {
+          if (!this.filteredPulse || this.filteredPulse.length === 0) {
+              console.log("No data to display.");
+              return;
+          }
+
+          // Debugging: Log pulseType and filteredPulse data
+          console.log("Pulse Type: ", this.pulseType);
+          console.log("Filtered Pulse Data: ", this.filteredPulse);
+
+          const data = google.visualization.arrayToDataTable([
+              ['Date', this.pulseType],
+              ...this.filteredPulse.map(history => [this.formatDate(history.recordTime), history[this.pulseType]])
+          ]);
+
+          const options = {
+              title: `${this.pulseType.charAt(0).toUpperCase() + this.pulseType.slice(1)} Trend`,
+              hAxis: { title: 'Date', titleTextStyle: { color: '#333' } },
+              vAxis: { minValue: 0 }
+          };
+
+          const chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+      },
         // Dateformat for visning dato
         formatDate(datetime) {
             const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -119,8 +155,12 @@ Vue.createApp({
               alert('Registration failed!');
             });
           }
+          
        
 
-    }
+    },
+    mounted() {
+      this.pulseType = document.getElementById('app').getAttribute('data-pulse-type');
+  }
 
 }).mount("#app")
