@@ -50,6 +50,7 @@ Vue.createApp({
             }
             return this.person.pulsHistories.filter(history => history.stresspuls !== 0);
         },
+        
         filteredPulse() {
           if (!this.person || !this.person.pulsHistories) {
               return [];
@@ -70,18 +71,19 @@ Vue.createApp({
                 alert(ex.message) 
             }
         },
-
+          //google chart drawchart
         drawChart() {
           google.charts.load('current', { packages: ['corechart'] });
           google.charts.setOnLoadCallback(this.renderChart);
       },
+      // google chart 
       renderChart() {
           if (!this.filteredPulse || this.filteredPulse.length === 0) {
               console.log("No data to display.");
               return;
           }
 
-          // Debugging: Log pulseType and filteredPulse data
+          
           console.log("Pulse Type: ", this.pulseType);
           console.log("Filtered Pulse Data: ", this.filteredPulse);
 
@@ -96,7 +98,7 @@ Vue.createApp({
               vAxis: { minValue: 0 }
           };
 
-          const chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+          const chart = new google.visualization.LineChart(document.getElementById('chart_div'));
           chart.draw(data, options);
       },
         // Dateformat for visning dato
@@ -159,6 +161,7 @@ Vue.createApp({
        
 
     },
+    
     mounted() {
       this.pulseType = document.getElementById('app').getAttribute('data-pulse-type');
   }
