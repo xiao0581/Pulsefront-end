@@ -137,6 +137,18 @@ Vue.createApp({
               alert('Login failed!');
             });
           }, 
+
+          runPythonScript() {
+            axios.get('http://192.168.1.100:5000/run-script')  //  Raspberry Pi  IP adresss
+            .then(response => {
+                console.log(response.data);
+                alert('Python script executed!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to run Python script.');
+            });
+        },
             
           register() {
             // Handle the registration logic here, for example, using axios to send the registration request
