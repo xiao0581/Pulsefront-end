@@ -41,8 +41,10 @@
         <div >
             <input placeholder="please enter name" type="text" v-model="name"  id="NameInput">
             <button v-on:click=" getbyName(name) " class="btn btn-secondary" id="getbyNameButton">Search</button>
+            <button id="runScriptButton" @click="runPythonScript">Run Python Script</button>
         </div>
 
+      
         <div class="row">
             <div class="container left">
                 <div>

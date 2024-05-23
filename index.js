@@ -137,6 +137,7 @@ Vue.createApp({
               alert('Login failed!');
             });
           }, 
+            
           register() {
             // Handle the registration logic here, for example, using axios to send the registration request
             axios.post('https://loginserver2.azurewebsites.net/api/Users/register', {
