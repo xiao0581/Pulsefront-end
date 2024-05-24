@@ -27,13 +27,15 @@
                 <span class="visually-hidden">(current)</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">History</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle show" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Pulshistorie</a>
+              <div class="dropdown-menu " data-bs-popper="static">
+                <a class="dropdown-item" href="Pages/restpulse.html">Hvile Puls</a>
+                <a class="dropdown-item" href="Pages/activepuls.html">Aktiv Puls</a>
+                <a class="dropdown-item" href="Pages/aftertrainingpulse.html">Efter Træning</a>
+                <a class="dropdown-item" href="Pages/stresspulse.html">Stresspulss</a>
+              </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Om os</a>
-            </li>
-
           </ul>
           <button class="btn btn-secondary my-2 my-sm-0" type="button" @click="showLoginModal">Login</button>
           <button class="btn btn-secondary my-2 my-sm-0 ms-2" type="button" @click="showRegisterModal">Register</button>
@@ -179,7 +181,7 @@
           <p>Den normale hvilepuls er mellem 60-100 slag per minut (BPM) for voksne. Dog kan den ideelle hvilepuls
             variere afhængigt af faktorer som alder, fitnessniveau og generel sundhedstilstand. For sportsudøvere og
             personer med god kardiovaskulær sundhed kan hvilepulsen være lavere, typisk under 60 BPM.</p>
-          <button class="btn btn-success mt-2">Lær Mere</button>
+            <a class="btn btn-success mt-2" href="https://hjerteforeningen.dk/2024/01/dette-skal-du-vide-om-pulsen-og-dit-hjerte/">Lær Mere</a>
         </div>
         <div class="col-12  col-md-6">
           <img src="tr.jpg" class="img-fluid" alt="Laptop with data">
@@ -206,7 +208,7 @@
           <div> Husk, individuelle forskelle er almindelige, så det er vigtigt at konsultere en sundhedsfaglig for at få
             personlig rådgivning.</div>
           </p>
-          <button class="btn btn-success mt-2">Lær Mere</button>
+          <a class="btn btn-success mt-2" href="https://hjerteforeningen.dk/2024/01/dette-skal-du-vide-om-pulsen-og-dit-hjerte/">Lær Mere</a>
 
         </div>
       </div>
@@ -221,7 +223,7 @@
             naturlig fysiologisk reaktion, der forbereder din krop på at håndtere potentielle trusler. Imidlertid kan
             kronisk angst og høje stressniveauer have negative konsekvenser for dit kardiovaskulære helbred, så det er
             afgørende at effektivt håndtere stress gennem afslapningsteknikker og stressreduktionstrategier.</p>
-          <button class="btn btn-success mt-2">Lær Mere</button>
+            <a class="btn btn-success mt-2" href="https://hjerteforeningen.dk/2024/01/dette-skal-du-vide-om-pulsen-og-dit-hjerte/">Lær Mere</a>
         </div>
         <div class="col-12  col-md-6">
           <img src="angst.jpg" class="img-fluid" alt="Laptop with data">
