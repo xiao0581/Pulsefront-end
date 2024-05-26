@@ -7,14 +7,16 @@ Vue.createApp({
             person:[],
             name: null,
             pulseType: '',
+            user: null,
+            currentUser: null,
             loginUser: {
                 username: '',
                 password: ''
             },
             registerData: {
                 username: '',
-                email: '',
                 password: '',
+                email: '',
                 fullName: '',
                 address: ''
               }
@@ -59,18 +61,23 @@ Vue.createApp({
       }
         
     }, 
+
     methods: {
-        //  get persons history by name
+        // get persons pulse data
         async getbyName(name) { 
             try {
+               
                 const response = await axios.get(baseUrl+name.toLowerCase()+"/histories")
                 this.person = await response.data
                 this.drawChart();
-                console.log(this.persons)
+                console.log("Filtered Pulse Data: ", this.filteredPulse);
+               
+                
             } catch (ex) {
                 alert(ex.message) 
             }
         },
+       
           //google chart drawchart
         drawChart() {
           google.charts.load('current', { packages: ['corechart'] });
@@ -120,34 +127,44 @@ Vue.createApp({
             const modal = new bootstrap.Modal(document.getElementById('registerModal'));
             modal.show();
           },
+
+          //login 
           login() {
-            // Handle the login logic here, for example, using axios to send the login request
             axios.post('https://loginserver2.azurewebsites.net/api/Users/login', {
-                Username: this.loginUser.username,
-                Password: this.loginUser.password
+                username: this.loginUser.username,
+                password: this.loginUser.password
             })
             .then(response => {
-              // Handle successful login
-              const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-              modal.hide();
-              alert('Login successful!');
+                const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                modal.hide();
+                alert('Login successful!');
+                console.log(response.data.username);
+                localStorage.setItem('username', response.data.username);
+                window.location.reload(); // Refresh the page to show the user data
+              
+        
+             
             })
             .catch(error => {
-              // Handle login error
-              alert('Login failed!');
+                alert('Login failed!');
             });
-          }, 
+        },
+        //logout
+        logout() {
+            this.currentUser = null;
+            localStorage.removeItem('username');
+            alert('Logout successful!');
+        },
 
-          
-            
+       //register
           register() {
             // Handle the registration logic here, for example, using axios to send the registration request
             axios.post('https://loginserver2.azurewebsites.net/api/Users/register', {
-                Username: this.registerData.username,
-                Password: this.registerData.password,
-                Email: this.registerData.email,
-                FullName: this.registerData.fullName,
-                Address: this.registerData.address
+                username: this.registerData.username,
+                password: this.registerData.password,
+                email: this.registerData.email,
+                fullName: this.registerData.fullName,
+                address: this.registerData.address
             })
             .then(response => {
               // Handle successful registration
@@ -159,7 +176,10 @@ Vue.createApp({
               // Handle registration error
               alert('Registration failed!');
             });
+
+            
           }
+          
           
        
 
@@ -167,6 +187,16 @@ Vue.createApp({
     
     mounted() {
       this.pulseType = document.getElementById('app').getAttribute('data-pulse-type');
+      this.currentUser = localStorage.getItem('username');
+      if (this.currentUser) {
+          console.log("current user: " + this.currentUser);
+          // 
+          this.getbyName(this.currentUser);
+      } else {
+          console.log("not found user");
+      }
+     
+        
   }
 
 }).mount("#app")
