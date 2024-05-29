@@ -22,8 +22,8 @@ jobs:
     - name: Deploy to FTP server
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
-        ftp-server: ${{ nt15.unoeuro.com }}
-        ftp-username: ${{ luckfish.dk }}
-        ftp-password: ${{ Ady9aGrFbthx4km5wceD }}
+        ftp-server: ${{nt15.unoeuro.com}}
+        ftp-username: ${{luckfish.dk}}
+        ftp-password: ${{Ady9aGrFbthx4km5wceD}}
         local-dir: ./  
         server-dir: /public_html/  
